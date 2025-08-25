@@ -1,0 +1,1 @@
+cmd /c copy /b .\LOVE\love.exe+nova_invaders.zip nova_invaders.exe
