@@ -1,5 +1,6 @@
 Player = require("player")
 Planets = require("planets")
+Controls = require("controls")
 
 Main_hub = {}
 
@@ -23,7 +24,7 @@ function Main_hub.load()
     Planets.create(300, 1000, _G.planeta_1, 2)
     Planets.create(1000, 300, _G.planeta_1, 3)
 
-    Player:load(800, 400, _G.plyr_img)
+    Player:load(love.graphics.getWidth()/2, love.graphics.getHeight()/2, _G.plyr_img)
 end
 
 function Main_hub.update(dt)
@@ -38,19 +39,22 @@ function Main_hub.update(dt)
 
     Player:update(dt)
 
-    camera.x = Player.x - love.graphics.getWidth() / 2
-    camera.y = Player.y - love.graphics.getHeight() / 2
+    camera.x = Player.x - love.graphics.getWidth() / 2 --+ Player.img:getWidth() * 2
+    camera.y = Player.y - love.graphics.getHeight() / 2 --+ Player.img:getHeight() * 2
 
     if camera.x < 0 then camera.x = 0 end
     if camera.y < 0 then camera.y = 0 end
     if camera.x > background:getWidth()*2 then camera.x = background:getWidth()*2 end
     if camera.y > background:getHeight()*2 then camera.y = background:getHeight()*2 end
+
+    Controls.update(camera.x + love.graphics.getWidth() / 2, camera.y + love.graphics.getHeight() / 2)
 end
 
 function Main_hub.draw()
     love.graphics.translate(-camera.x, -camera.y)
     love.graphics.draw(_G.background, 0, 0, 0, 4, 4)
     Planets.draw()
+    Controls.draw()
     Player:draw()
 end
 
