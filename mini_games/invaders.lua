@@ -1,7 +1,9 @@
-Invaders = {}
+local love = require "love"
+local Controls = require "controls"
+local Invaders = {}
 
-X = 100
-X_2 = 300
+X = 600
+X_2 = 800
 
 local speed = 6
 local projectiles = {}
@@ -47,6 +49,8 @@ function Invaders.update()
     if love.keyboard.isDown("right") then
         X_2 = X_2 + speed
     end
+
+    Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 
     fs_timer = fs_timer + 1
     projectile_fire_rate = projectile_fire_rate + 1
@@ -112,8 +116,11 @@ end
 function Invaders.draw()
     love.graphics.draw(_G.background, 0, 0, 0, 2, 2)
 
-    love.graphics.setFont(love.graphics.newFont(20))
-    love.graphics.print("SCORE: " .. score, 10, 750)
+    Controls.draw_a(50, 700)
+    Controls.draw_d(114, 700)
+
+    Controls.draw_left(1250, 700)
+    Controls.draw_right(1314, 700)
 
     for _, enemy in ipairs(enemies) do
         love.graphics.draw(_G.enemy_img, enemy.x, enemy.y, 0, 4, 4)

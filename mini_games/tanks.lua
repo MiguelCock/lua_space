@@ -1,4 +1,4 @@
-Tanks = {}
+local Tanks = {}
 
 function Tanks.load()
     love.window.setTitle("Tank Duel")

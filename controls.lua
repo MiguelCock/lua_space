@@ -1,4 +1,4 @@
-Controls = {
+local Controls = {
     spriteSheet = love.graphics.newImage("imgs/WASD.png"),
     quads = {
         w_up = love.graphics.newQuad(0, 0, 16, 16, 128, 32),
@@ -47,56 +47,79 @@ function Controls.update(camera_x, camera_y)
 end
 
 function Controls.draw()
+    Controls.draw_w(200, 200)
+    Controls.draw_a(136, 264)
+    Controls.draw_s(200, 264)
+    Controls.draw_d(264, 264)
+
+    Controls.draw_up(200, 50)
+    Controls.draw_left(136,114)
+    Controls.draw_down(200, 114)
+    Controls.draw_right(264,114)
+end
+
+function Controls.draw_w(x, y)
     if key_pressed.w then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.w_down, 200 + Controls.offset.x, 200 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.w_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.w_up, 200 + Controls.offset.x, 200 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.w_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_a(x, y)
     if key_pressed.a then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.a_down, 136 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.a_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.a_up, 136 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.a_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_s(x, y)
     if key_pressed.s then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.s_down, 200 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.s_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.s_up, 200 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.s_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_d(x, y)
     if key_pressed.d then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.d_down, 264 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.d_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.d_up, 264 + Controls.offset.x, 264 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.d_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
-    -- ARROW KEYS
-
+function Controls.draw_up(x, y)
     if key_pressed.up then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_up_down, 200 + Controls.offset.x, 50 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_up_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_up_up, 200 + Controls.offset.x, 50 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_up_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_left(x, y)
     if key_pressed.left then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_left_down, 136 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_left_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_left_up, 136 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_left_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_down(x, y)
     if key_pressed.down then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_down_down, 200 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_down_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_down_up, 200 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_down_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
+end
 
+function Controls.draw_right(x, y)
     if key_pressed.right then
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_right_down, 264 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_right_down, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     else
-        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_right_up, 264 + Controls.offset.x, 114 + Controls.offset.y, 0, 4, 4) -- Scaled by 4 for visibility
+        love.graphics.draw(Controls.spriteSheet, Controls.quads.arrow_right_up, x + Controls.offset.x, y + Controls.offset.y, 0, 4, 4)
     end
-
 end
 
 return Controls

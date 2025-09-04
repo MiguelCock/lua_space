@@ -2,7 +2,7 @@ local Particle = require "particles"
 
 local burst
 
-Player = {
+local Player = {
     x = 0,
     y = 0,
     sx = 0,

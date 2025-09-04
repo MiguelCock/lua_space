@@ -1,4 +1,3 @@
--- particle.lua
 local Particle = {}
 Particle.__index = Particle
 

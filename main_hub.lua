@@ -1,8 +1,8 @@
-Player = require("player")
-Planets = require("planets")
-Controls = require("controls")
+local Player = require("player")
+local Planets = require("planets")
+local Controls = require("controls")
 
-Main_hub = {}
+local Main_hub = {}
 
 local fs_timer = 0
 
