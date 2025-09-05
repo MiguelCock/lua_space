@@ -9,8 +9,8 @@ function love.conf(t)
 
     t.window.vsync = 1
 
-    t.window.x = 0
-    t.window.y = 0
+    t.window.x = 100
+    t.window.y = 20
 
     --t.window.fullscreen = true
     t.window.borderless = true

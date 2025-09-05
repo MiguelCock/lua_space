@@ -1,6 +1,8 @@
+local Invaders = {}
+
 local love = require "love"
 local Controls = require "controls"
-local Invaders = {}
+local Particles = require "particles"
 
 X = 600
 X_2 = 800
@@ -11,7 +13,6 @@ local projectile_fire_rate = 0
 local projectile_fire_rate_2 = 0
 local enemies = {}
 local enemy_speed = 0.4
-local fs_timer = 0
 local score = 0
 
 local VIRTUAL_HEIGHT = 800
@@ -22,11 +23,13 @@ _G.projectile_img = love.graphics.newImage("imgs/star.png")
 _G.enemy_img = love.graphics.newImage("imgs/frog.png")
 _G.background = love.graphics.newImage("imgs/bg.png")
 
+local burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+
 function Invaders.load()
     CreateEnemies()
 end
 
-function Invaders.update()
+function Invaders.update(dt)
     if love.keyboard.isDown("a") then
         X = X - speed
     end
@@ -76,6 +79,9 @@ function Invaders.update()
         score = score + 1000
     end
 
+    burst:update(dt)
+    local particle_amount = 10
+
     -- proyectiles collision with enemies
     for i = #enemies, 1, -1 do
         local enemy = enemies[i]
@@ -84,8 +90,9 @@ function Invaders.update()
             if CheckCollision(p.x, p.y, _G.projectile_img:getWidth()*4, _G.projectile_img:getHeight()*4, enemy.x, enemy.y, _G.enemy_img:getWidth()*4, _G.enemy_img:getHeight()*4) then
                 table.remove(projectiles, j)
                 table.remove(enemies, i)
+                burst:setPosition(enemy.x + _G.enemy_img:getWidth()/2, enemy.y + _G.enemy_img:getHeight()/2)
+                burst:emit(particle_amount)
                 score = score + 50
-                break
             end
         end
     end
@@ -105,12 +112,19 @@ end
 function Invaders.draw()
     love.graphics.draw(_G.background, 0, 0, 0, 2, 2)
 
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("SCORE", 10, 50)
+    love.graphics.setColor(0.6,0.5,0.4)
+    love.graphics.print(score, 250, 50)
+    love.graphics.setColor(1,1,1)
+
     Controls.draw_a(50, 700)
     Controls.draw_d(114, 700)
 
     Controls.draw_left(1250, 700)
     Controls.draw_right(1314, 700)
 
+    burst:draw()
     for _, enemy in ipairs(enemies) do
         love.graphics.draw(_G.enemy_img, enemy.x, enemy.y, 0, 4, 4)
     end

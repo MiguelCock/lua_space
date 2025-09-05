@@ -1,6 +1,7 @@
 _G.love = require("love")
 
 love.graphics.setDefaultFilter("nearest", "nearest")
+love.graphics.setFont(love.graphics.newFont("assets/daydream.otf", 32))
 
 local shader = require("shader")
 local player = require("player")

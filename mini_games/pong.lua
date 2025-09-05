@@ -20,10 +20,10 @@ local speed = 6
 local p1_score = 0
 local p2_score = 0
 
-_G.plyr_img = love.graphics.newImage("imgs/tiburon.png")
-_G.plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
-_G.ball = love.graphics.newImage("imgs/ball.png")
-_G.pong_background = love.graphics.newImage("imgs/pong_bg.png")
+local plyr_img = love.graphics.newImage("imgs/tiburon.png")
+local plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
+local ball_img = love.graphics.newImage("imgs/ball.png")
+local pong_background = love.graphics.newImage("imgs/pong_bg.png")
 
 function Pong.update(dt)
     if love.keyboard.isDown("w") then
@@ -61,17 +61,17 @@ function Pong.update(dt)
         ball.dir.y = -ball.dir.y * 1.1
         ball.dir.x = ball.dir.x * 1.1
     end
-    if ball.y > 800-_G.ball:getHeight()*4 then
+    if ball.y > 800 - ball_img:getHeight()*4 then
         ball.dir.y = -ball.dir.y * 1.05
         ball.dir.x = ball.dir.x * 1.05
     end
 
     -- collition ball with players
-    if CheckCollision(50+_G.plyr_img:getWidth()*4, Y, 1, _G.plyr_img:getHeight()*4, ball.x, ball.y, _G.ball:getWidth()*2, _G.ball:getHeight()*2) then
+    if CheckCollision(50+plyr_img:getWidth()*4, Y, 1, plyr_img:getHeight()*4, ball.x, ball.y, ball_img:getWidth()*2, ball_img:getHeight()*2) then
         ball.dir.x = -ball.dir.x * 1.05
         ball.dir.y = ball.dir.y * 1.05
     end
-    if CheckCollision(1200, Y_2, 1, _G.plyr_img_2:getHeight()*4, ball.x, ball.y, _G.ball:getWidth()*2, _G.ball:getHeight()*2) then
+    if CheckCollision(1200, Y_2, 1, plyr_img_2:getHeight()*4, ball.x, ball.y, ball_img:getWidth()*2, ball_img:getHeight()*2) then
         ball.dir.x = -ball.dir.x * 1.05
         ball.dir.y = ball.dir.y * 1.05
     end
@@ -81,7 +81,7 @@ function Pong.update(dt)
 end
 
 function Pong.draw()
-    love.graphics.draw(_G.pong_background, 0, 0, 0, 2, 2)
+    love.graphics.draw(pong_background, 0, 0, 0, 2, 2)
 
     Controls.draw_w(50, 700)
     Controls.draw_s(114, 700)
@@ -89,11 +89,20 @@ function Pong.draw()
     Controls.draw_up(1250, 700)
     Controls.draw_down(1314, 700)
 
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("SCORE P1", 10, 50)
+    love.graphics.setColor(1,0,1)
+    love.graphics.print(p1_score, 250, 50)
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("SCORE P2", 1050, 50)
+    love.graphics.setColor(1,0,1)
+    love.graphics.print(p2_score, 1300, 50)
+    love.graphics.setColor(1,1,1)
 
-    love.graphics.draw(_G.ball, ball.x, ball.y, 0, 2, 2)
+    love.graphics.draw(ball_img, ball.x, ball.y, 0, 2, 2)
 
-    love.graphics.draw(_G.plyr_img, 50, Y, 0, 4, 4)
-    love.graphics.draw(_G.plyr_img_2, 1200, Y_2, 0, 4, 4)
+    love.graphics.draw(plyr_img, 50, Y, 0, 4, 4)
+    love.graphics.draw(plyr_img_2, 1200, Y_2, 0, 4, 4)
 end
 
 function CheckCollision(x1, y1, w1, h1, x2, y2, w2, h2)

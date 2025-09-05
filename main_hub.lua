@@ -4,8 +4,6 @@ local Controls = require("controls")
 
 local Main_hub = {}
 
-local fs_timer = 0
-
 local camera = {
     x = 0,
     y = 0
@@ -27,12 +25,6 @@ function Main_hub.load()
 end
 
 function Main_hub.update(dt)
-    fs_timer = fs_timer + 1
-    if love.keyboard.isDown("f11") and fs_timer > 30 then
-        love.window.setFullscreen(not love.window.getFullscreen())
-        fs_timer = 0
-    end
-
     Player:update(dt)
 
     camera.x = Player.x - love.graphics.getWidth() / 2 --+ Player.img:getWidth() * 2
