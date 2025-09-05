@@ -46,7 +46,7 @@ function Player.update(self, dt)
         self.sy = 0
     end
 
-    local particle_amount = 100
+    local particle_amount = 30
     if (love.keyboard.isDown("a") or love.keyboard.isDown("left")) and self.sx > -self.top_speed then
         self.sx = self.sx - self.acceleration
         burst:emit(particle_amount)

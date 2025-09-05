@@ -112,12 +112,6 @@ end
 function Invaders.draw()
     love.graphics.draw(_G.background, 0, 0, 0, 2, 2)
 
-    love.graphics.setColor(0,0,0)
-    love.graphics.print("SCORE", 10, 50)
-    love.graphics.setColor(0.6,0.5,0.4)
-    love.graphics.print(score, 250, 50)
-    love.graphics.setColor(1,1,1)
-
     Controls.draw_a(50, 700)
     Controls.draw_d(114, 700)
 
@@ -135,6 +129,12 @@ function Invaders.draw()
 
     love.graphics.draw(_G.plyr_img, X, 600, 0, 4, 4)
     love.graphics.draw(_G.plyr_img_2, X_2, 600, 0, 4, 4)
+
+    love.graphics.setColor(0,0,0)
+    love.graphics.print("SCORE", 10, 50)
+    love.graphics.setColor(0.6,0.5,0.4)
+    love.graphics.print(score, 250, 50)
+    love.graphics.setColor(1,1,1)
 end
 
 function CreateEnemies()
