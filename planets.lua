@@ -6,7 +6,7 @@ function Planets.create(x, y, img, miniGameIndex)
         x = x,
         y = y,
         img = img,
-        radius = img:getWidth() * 8,
+        radius = img:getWidth() * 4,
         miniGameIndex = miniGameIndex
     }
     table.insert(Planets, planet)
@@ -29,7 +29,7 @@ end
 -- Draw all Planets
 function Planets.draw()
     for _, planet in ipairs(Planets) do
-        love.graphics.draw(planet.img, planet.x, planet.y, 0, 8, 8)
+        love.graphics.draw(planet.img, planet.x, planet.y, 0, 8, 8, planet.img:getWidth()/2, planet.img:getHeight()/2)
     end
 end
 

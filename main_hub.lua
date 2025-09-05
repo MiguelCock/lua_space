@@ -12,9 +12,7 @@ local camera = {
 }
 
 function Main_hub.load()
-    love.graphics.setBackgroundColor(1, 1, 1, 1)
-    love.graphics.setDefaultFilter("nearest", "nearest")
-
+    --love.graphics.setBackgroundColor(1, 1, 1, 1)
     _G.plyr_img = love.graphics.newImage("imgs/novapache2.png")
     _G.projectile_img = love.graphics.newImage("imgs/star.png")
     _G.background = love.graphics.newImage("imgs/bg.png")
@@ -23,14 +21,12 @@ function Main_hub.load()
 
     Planets.create(300, 1000, _G.planeta_1, 2)
     Planets.create(1000, 300, _G.planeta_1, 3)
+    Planets.create(1600, 1400, _G.planeta_1, 4)
 
     Player:load(love.graphics.getWidth()/2, love.graphics.getHeight()/2, _G.plyr_img)
 end
 
 function Main_hub.update(dt)
-    if love.keyboard.isDown("escape") then
-        love.event.quit()
-    end
     fs_timer = fs_timer + 1
     if love.keyboard.isDown("f11") and fs_timer > 30 then
         love.window.setFullscreen(not love.window.getFullscreen())

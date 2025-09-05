@@ -26,9 +26,6 @@ _G.ball = love.graphics.newImage("imgs/ball.png")
 _G.pong_background = love.graphics.newImage("imgs/pong_bg.png")
 
 function Pong.update(dt)
-    if love.keyboard.isDown("escape") then
-        love.event.quit()
-    end
     if love.keyboard.isDown("w") then
         Y = Y - speed
     end
@@ -84,7 +81,6 @@ function Pong.update(dt)
 end
 
 function Pong.draw()
-    love.graphics.clear(0, 0, 0, 1)
     love.graphics.draw(_G.pong_background, 0, 0, 0, 2, 2)
 
     Controls.draw_w(50, 700)

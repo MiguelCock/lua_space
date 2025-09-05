@@ -1,4 +1,4 @@
-local Particle = require "particles"
+local Particles = require "particles"
 
 local burst
 
@@ -19,7 +19,7 @@ function Player.load(self, x, y, img)
     self.y = y
     self.img = img
 
-    burst = Particle.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+    burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 end
 
 function Player.update(self, dt)
@@ -72,9 +72,6 @@ function Player.update(self, dt)
 end
 
 function Player.draw(self)
-    --love.graphics.print("angle: " .. self.angle, 10, 500)
-    --love.graphics.print("sc: " .. self.sx, 10, 520)
-    --love.graphics.print("sy: " .. self.sy, 10, 540)
     burst:draw()
     love.graphics.draw(self.img, self.x, self.y, self.angle, 4, 4, self.img:getWidth()/2, self.img:getHeight()/2)
 end

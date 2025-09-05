@@ -27,16 +27,6 @@ function Invaders.load()
 end
 
 function Invaders.update()
-    if love.keyboard.isDown("escape") then
-        love.event.quit()
-    end
-    if love.keyboard.isDown("f11") and fs_timer > 30 then
-        love.window.setFullscreen(not love.window.getFullscreen())
-        fs_timer = 0
-    end
-    if love.keyboard.isDown("e") then
-        CreateEnemies()
-    end
     if love.keyboard.isDown("a") then
         X = X - speed
     end
@@ -52,7 +42,6 @@ function Invaders.update()
 
     Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 
-    fs_timer = fs_timer + 1
     projectile_fire_rate = projectile_fire_rate + 1
     projectile_fire_rate_2 = projectile_fire_rate_2 + 1
 
