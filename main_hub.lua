@@ -16,10 +16,12 @@ function Main_hub.load()
     _G.background = love.graphics.newImage("imgs/bg.png")
 
     _G.planeta_1 = love.graphics.newImage("imgs/planeta.png")
+    _G.planeta_2 = love.graphics.newImage("imgs/planeta2.png")
+    _G.planeta_3 = love.graphics.newImage("imgs/planeta3.png")
 
     Planets.create(300, 1000, _G.planeta_1, 2)
-    Planets.create(1000, 300, _G.planeta_1, 3)
-    Planets.create(1600, 1400, _G.planeta_1, 4)
+    Planets.create(1000, 300, _G.planeta_2, 3)
+    Planets.create(1600, 900, _G.planeta_3, 4)
 
     Player:load(love.graphics.getWidth()/2, love.graphics.getHeight()/2, _G.plyr_img)
 end
