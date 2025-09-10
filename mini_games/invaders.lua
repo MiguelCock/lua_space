@@ -7,12 +7,12 @@ local Particles = require "particles"
 X = 600
 X_2 = 800
 
-local speed = 6
+local speed = 600
 local projectiles = {}
 local projectile_fire_rate = 0
 local projectile_fire_rate_2 = 0
 local enemies = {}
-local enemy_speed = 0.4
+local enemy_speed = 40
 local score = 0
 
 local VIRTUAL_HEIGHT = 800
@@ -31,24 +31,24 @@ end
 
 function Invaders.update(dt)
     if love.keyboard.isDown("a") then
-        X = X - speed
+        X = X - speed * dt
     end
     if love.keyboard.isDown("d") then
-        X = X + speed
+        X = X + speed * dt
     end
     if love.keyboard.isDown("left") then
-        X_2 = X_2 - speed
+        X_2 = X_2 - speed * dt
     end
     if love.keyboard.isDown("right") then
-        X_2 = X_2 + speed
+        X_2 = X_2 + speed * dt
     end
 
     Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 
-    projectile_fire_rate = projectile_fire_rate + 1
-    projectile_fire_rate_2 = projectile_fire_rate_2 + 1
+    projectile_fire_rate = projectile_fire_rate + dt
+    projectile_fire_rate_2 = projectile_fire_rate_2 + dt
 
-    if love.keyboard.isDown("space") and projectile_fire_rate > 15 then
+    if love.keyboard.isDown("space") and projectile_fire_rate > 0.1 then
         projectiles[#projectiles + 1] = {
             x = X + _G.plyr_img:getWidth() / 1.5,
             y = 600,
@@ -56,7 +56,7 @@ function Invaders.update(dt)
         projectile_fire_rate = 0
     end
 
-    if love.keyboard.isDown("l") and projectile_fire_rate_2 > 15 then
+    if love.keyboard.isDown("l") and projectile_fire_rate_2 > 0.1 then
         projectiles[#projectiles + 1] = {
             x = X_2 + _G.plyr_img_2:getWidth() / 1.5,
             y = 600,
@@ -66,7 +66,7 @@ function Invaders.update(dt)
 
     for i = #projectiles, 1, -1 do
         local p = projectiles[i]
-        p.y = p.y - 10
+        p.y = p.y - 1000 * dt
         if p.y < 0 then
             table.remove(projectiles, i)
         end
@@ -75,7 +75,7 @@ function Invaders.update(dt)
     -- if there are no enemies spawn them again
     if #(enemies) == 0 then
         CreateEnemies()
-        enemy_speed = enemy_speed + 0.1
+        enemy_speed = enemy_speed * 1.1
         score = score + 1000
     end
 
@@ -100,10 +100,10 @@ function Invaders.update(dt)
     -- move enemies down
     for _, enemy in ipairs(enemies) do
         enemy.x = enemy.x + math.cos(enemy.y/10)
-        enemy.y = enemy.y + enemy_speed
+        enemy.y = enemy.y + enemy_speed * dt
         if enemy.y > VIRTUAL_HEIGHT then
             score = 0
-            enemy_speed = 0.4
+            enemy_speed = 40
             CreateEnemies()
         end
     end
