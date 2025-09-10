@@ -46,16 +46,18 @@ function Controls.update(camera_x, camera_y)
     Controls.offset.y = camera_y - love.graphics.getHeight() / 2
 end
 
-function Controls.draw()
-    Controls.draw_w(200, 200)
-    Controls.draw_a(136, 264)
-    Controls.draw_s(200, 264)
-    Controls.draw_d(264, 264)
+function Controls.draw_wasd(x, y)
+    Controls.draw_w(x, y)
+    Controls.draw_a(x - 64, y + 64)
+    Controls.draw_s(x, y + 64)
+    Controls.draw_d(x + 64, y + 64)
+end
 
-    Controls.draw_up(200, 50)
-    Controls.draw_left(136,114)
-    Controls.draw_down(200, 114)
-    Controls.draw_right(264,114)
+function Controls.draw_arrows(x, y)
+    Controls.draw_up(x, y)
+    Controls.draw_left(x - 64, y + 64)
+    Controls.draw_down(x, y + 64)
+    Controls.draw_right(x + 64, y + 64)
 end
 
 function Controls.draw_w(x, y)

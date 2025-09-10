@@ -23,14 +23,14 @@ function Main_hub.load()
     Planets.create(1000, 300, _G.planeta_2, 3)
     Planets.create(1600, 900, _G.planeta_3, 4)
 
-    Player:load(love.graphics.getWidth()/2, love.graphics.getHeight()/2, _G.plyr_img)
+    Player:load(1400/2, 800/2, _G.plyr_img)
 end
 
 function Main_hub.update(dt)
     Player:update(dt)
 
-    camera.x = Player.x - love.graphics.getWidth() / 2 --+ Player.img:getWidth() * 2
-    camera.y = Player.y - love.graphics.getHeight() / 2 --+ Player.img:getHeight() * 2
+    camera.x = Player.x - 1400 / 2 --+ Player.img:getWidth() * 2
+    camera.y = Player.y - 800 / 2 --+ Player.img:getHeight() * 2
 
     if camera.x < 0 then camera.x = 0 end
     if camera.y < 0 then camera.y = 0 end
@@ -44,7 +44,8 @@ function Main_hub.draw()
     love.graphics.translate(-camera.x, -camera.y)
     love.graphics.draw(_G.background, 0, 0, 0, 4, 4)
     Planets.draw()
-    Controls.draw()
+    Controls.draw_wasd(150, 600)
+    Controls.draw_arrows(1150, 600)
     Player:draw()
 end
 

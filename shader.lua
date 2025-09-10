@@ -1,7 +1,7 @@
 local Shader = {
   crtShader = love.graphics.newShader("shaders/crt_2.glsl"),
   time = 0,
-  sceneCanvas = love.graphics.newCanvas(love.graphics.getWidth(), love.graphics.getHeight())
+  sceneCanvas = love.graphics.newCanvas(1400, 800)
 }
 
 Shader.crtShader:send("curvature", 0.5)
@@ -16,19 +16,36 @@ function Shader.draw(self, drawScene)
   love.graphics.push("all")
   love.graphics.setCanvas(self.sceneCanvas)
   love.graphics.setBlendMode("alpha", "premultiplied")
-  love.graphics.clear(0,0,0,1)
+  love.graphics.clear(0,0,0,0)
   drawScene()
   love.graphics.setCanvas()
   love.graphics.pop()
 
   -- 2) Draw the canvas to the screen with the CRT shader
   love.graphics.push("all")
+  love.graphics.clear(0,0,0,1)
   love.graphics.setShader(self.crtShader)
 
-  local y = love.graphics.getHeight() / 800
-  local x = love.graphics.getWidth() / 1400
+  -- Get canvas dimensions
+  local canvas_width = self.sceneCanvas:getWidth()
+  local canvas_height = self.sceneCanvas:getHeight()
 
-  love.graphics.draw(self.sceneCanvas, -love.graphics.getWidth()*x*0.099, -love.graphics.getHeight()*y*0.099, 0, x*1.2, y*1.2)
+  local val = 1.2
+  
+  -- Calculate scale factors
+  local scale_x = (love.graphics.getWidth() / 1400) * val
+  local scale_y = (love.graphics.getHeight() / 800) * val
+  
+  -- Calculate the actual scaled dimensions of the canvas
+  local scaled_canvas_width = canvas_width * scale_x
+  local scaled_canvas_height = canvas_height * scale_y
+  
+  -- Calculate displacement to center the scaled canvas
+  local displacement_x = (love.graphics.getWidth() - scaled_canvas_width) / 2
+  local displacement_y = (love.graphics.getHeight() - scaled_canvas_height) / 2
+
+  love.graphics.draw(self.sceneCanvas, displacement_x, displacement_y, 0, scale_x, scale_y)
+
   love.graphics.setShader()
   love.graphics.pop()
 end
