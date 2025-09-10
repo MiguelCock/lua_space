@@ -42,15 +42,11 @@ lua-space/
 
 ## 🕹️ How It Works
 
-Main Hub: The starting area where you control your player and choose planets.
-
-Planets: Each planet represents a different minigame.
-
-Minigames: Implemented as Lua tables exposing two functions:
-
-update(dt) → updates game logic
-
-draw() → renders the game
+- Main Hub: The starting area where you control your player and choose planets.
+- Planets: Each planet represents a different minigame.
+- Minigames: Implemented as Lua tables exposing two functions:
+    - update(dt) → updates game logic
+    - draw() → renders the game
 
 The hub calls these functions to run the selected minigame seamlessly.
 
