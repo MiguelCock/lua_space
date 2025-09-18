@@ -43,7 +43,7 @@ function Invaders.update(dt)
         Invaders.X_2 = Invaders.X_2 + Invaders.speed * dt
     end
 
-    Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+    Controls.update(0, 0)
 
     Invaders.projectile_fire_rate = Invaders.projectile_fire_rate + dt
     Invaders.projectile_fire_rate_2 = Invaders.projectile_fire_rate_2 + dt

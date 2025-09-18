@@ -83,7 +83,7 @@ function Pong.update(dt)
     end
 
     Shader.update(dt)
-    Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+    Controls.update(0, 0)
 end
 
 function Pong.draw()
