@@ -1,6 +1,4 @@
-local Tanks = {
-    grass_bg = love.graphics.newImage("imgs/pasto.png"),
-}
+local Tanks = {}
 
 function Tanks.load()
     local function newTank(x, y, angle, color, controls)
@@ -15,6 +13,8 @@ function Tanks.load()
             attk_peed = 60,
         }
     end
+
+    Tanks.grass_bg = love.graphics.newImage("imgs/pasto.png")
 
     -- Player 1 (WASD + Space)
     Tanks.tank1 = newTank(200, 400, 0, {1, 0, 0}, {

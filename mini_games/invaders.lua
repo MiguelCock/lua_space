@@ -4,106 +4,106 @@ local love = require "love"
 local Controls = require "controls"
 local Particles = require "particles"
 
-X = 600
-X_2 = 800
-
-local speed = 600
-local projectiles = {}
-local projectile_fire_rate = 0
-local projectile_fire_rate_2 = 0
-local enemies = {}
-local enemy_speed = 40
-local score = 0
-
-local VIRTUAL_HEIGHT = 800
-
-_G.plyr_img = love.graphics.newImage("imgs/novapache2.png")
-_G.plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
-_G.projectile_img = love.graphics.newImage("imgs/star.png")
-_G.enemy_img = love.graphics.newImage("imgs/frog.png")
-_G.background = love.graphics.newImage("imgs/bg.png")
-
-local burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
-
 function Invaders.load()
+    Invaders.X = 600
+    Invaders.X_2 = 800
+
+    Invaders.speed = 600
+    Invaders.projectiles = {}
+    Invaders.projectile_fire_rate = 0
+    Invaders.projectile_fire_rate_2 = 0
+    Invaders.enemies = {}
+    Invaders.enemy_speed = 40
+    Invaders.score = 0
+
+    Invaders.VIRTUAL_HEIGHT = 800
+
+    _G.plyr_img = love.graphics.newImage("imgs/novapache2.png")
+    _G.plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
+    _G.projectile_img = love.graphics.newImage("imgs/star.png")
+    _G.enemy_img = love.graphics.newImage("imgs/frog.png")
+    _G.background = love.graphics.newImage("imgs/bg.png")
+
+    Invaders.burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+
     CreateEnemies()
 end
 
 function Invaders.update(dt)
     if love.keyboard.isDown("a") then
-        X = X - speed * dt
+        Invaders.X = Invaders.X - Invaders.speed * dt
     end
     if love.keyboard.isDown("d") then
-        X = X + speed * dt
+        Invaders.X = Invaders.X + Invaders.speed * dt
     end
     if love.keyboard.isDown("left") then
-        X_2 = X_2 - speed * dt
+        Invaders.X_2 = Invaders.X_2 - Invaders.speed * dt
     end
     if love.keyboard.isDown("right") then
-        X_2 = X_2 + speed * dt
+        Invaders.X_2 = Invaders.X_2 + Invaders.speed * dt
     end
 
     Controls.update(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 
-    projectile_fire_rate = projectile_fire_rate + dt
-    projectile_fire_rate_2 = projectile_fire_rate_2 + dt
+    Invaders.projectile_fire_rate = Invaders.projectile_fire_rate + dt
+    Invaders.projectile_fire_rate_2 = Invaders.projectile_fire_rate_2 + dt
 
-    if love.keyboard.isDown("space") and projectile_fire_rate > 0.1 then
-        projectiles[#projectiles + 1] = {
-            x = X + _G.plyr_img:getWidth() / 1.5,
+    if love.keyboard.isDown("space") and Invaders.projectile_fire_rate > 0.1 then
+        Invaders.projectiles[#Invaders.projectiles + 1] = {
+            x = Invaders.X + _G.plyr_img:getWidth() / 1.5,
             y = 600,
         }
-        projectile_fire_rate = 0
+        Invaders.projectile_fire_rate = 0
     end
 
-    if love.keyboard.isDown("l") and projectile_fire_rate_2 > 0.1 then
-        projectiles[#projectiles + 1] = {
-            x = X_2 + _G.plyr_img_2:getWidth() / 1.5,
+    if love.keyboard.isDown("l") and Invaders.projectile_fire_rate_2 > 0.1 then
+        Invaders.projectiles[#Invaders.projectiles + 1] = {
+            x = Invaders.X_2 + _G.plyr_img_2:getWidth() / 1.5,
             y = 600,
         }
-        projectile_fire_rate_2 = 0
+        Invaders.projectile_fire_rate_2 = 0
     end
 
-    for i = #projectiles, 1, -1 do
-        local p = projectiles[i]
+    for i = #Invaders.projectiles, 1, -1 do
+        local p = Invaders.projectiles[i]
         p.y = p.y - 1000 * dt
         if p.y < 0 then
-            table.remove(projectiles, i)
+            table.remove(Invaders.projectiles, i)
         end
     end
 
-    -- if there are no enemies spawn them again
-    if #(enemies) == 0 then
+    -- if there are no Invaders.enemies spawn them again
+    if #(Invaders.enemies) == 0 then
         CreateEnemies()
-        enemy_speed = enemy_speed * 1.1
-        score = score + 1000
+        Invaders.enemy_speed = Invaders.enemy_speed * 1.1
+        Invaders.score = Invaders.score + 1000
     end
 
-    burst:update(dt)
+    Invaders.burst:update(dt)
     local particle_amount = 10
 
-    -- proyectiles collision with enemies
-    for i = #enemies, 1, -1 do
-        local enemy = enemies[i]
-        for j = #projectiles, 1, -1 do
-            local p = projectiles[j]
+    -- proyectiles collision with Invaders.enemies
+    for i = #Invaders.enemies, 1, -1 do
+        local enemy = Invaders.enemies[i]
+        for j = #Invaders.projectiles, 1, -1 do
+            local p = Invaders.projectiles[j]
             if CheckCollision(p.x, p.y, _G.projectile_img:getWidth()*4, _G.projectile_img:getHeight()*4, enemy.x, enemy.y, _G.enemy_img:getWidth()*4, _G.enemy_img:getHeight()*4) then
-                table.remove(projectiles, j)
-                table.remove(enemies, i)
-                burst:setPosition(enemy.x + _G.enemy_img:getWidth()/2, enemy.y + _G.enemy_img:getHeight()/2)
-                burst:emit(particle_amount)
-                score = score + 50
+                table.remove(Invaders.projectiles, j)
+                table.remove(Invaders.enemies, i)
+                Invaders.burst:setPosition(enemy.x + _G.enemy_img:getWidth()/2, enemy.y + _G.enemy_img:getHeight()/2)
+                Invaders.burst:emit(particle_amount)
+                Invaders.score = Invaders.score + 50
             end
         end
     end
 
-    -- move enemies down
-    for _, enemy in ipairs(enemies) do
+    -- move Invaders.enemies down
+    for _, enemy in ipairs(Invaders.enemies) do
         enemy.x = enemy.x + math.cos(enemy.y/10)
-        enemy.y = enemy.y + enemy_speed * dt
-        if enemy.y > VIRTUAL_HEIGHT then
-            score = 0
-            enemy_speed = 40
+        enemy.y = enemy.y + Invaders.enemy_speed * dt
+        if enemy.y > Invaders.VIRTUAL_HEIGHT then
+            Invaders.score = 0
+            Invaders.enemy_speed = 40
             CreateEnemies()
         end
     end
@@ -118,22 +118,22 @@ function Invaders.draw()
     Controls.draw_left(1250, 700)
     Controls.draw_right(1314, 700)
 
-    burst:draw()
-    for _, enemy in ipairs(enemies) do
+    Invaders.burst:draw()
+    for _, enemy in ipairs(Invaders.enemies) do
         love.graphics.draw(_G.enemy_img, enemy.x, enemy.y, 0, 4, 4)
     end
 
-    for _, p in ipairs(projectiles) do
+    for _, p in ipairs(Invaders.projectiles) do
         love.graphics.draw(_G.projectile_img, p.x, p.y, 0, 4, 4)
     end
 
-    love.graphics.draw(_G.plyr_img, X, 600, 0, 4, 4)
-    love.graphics.draw(_G.plyr_img_2, X_2, 600, 0, 4, 4)
+    love.graphics.draw(_G.plyr_img, Invaders.X, 600, 0, 4, 4)
+    love.graphics.draw(_G.plyr_img_2, Invaders.X_2, 600, 0, 4, 4)
 
     love.graphics.setColor(0,0,0)
     love.graphics.print("SCORE", 10, 50)
     love.graphics.setColor(0.6,0.5,0.4)
-    love.graphics.print(score, 250, 50)
+    love.graphics.print(Invaders.score, 250, 50)
     love.graphics.setColor(1,1,1)
 end
 
@@ -149,7 +149,7 @@ function CreateEnemies()
             y = 250
             x = -(30 * (_G.enemy_img:getWidth() + 60))
         end
-        enemies[i] = {
+        Invaders.enemies[i] = {
             x = 100 + x + (i - 1) * (_G.enemy_img:getWidth() + 60),
             y = y
         }

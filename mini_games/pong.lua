@@ -4,79 +4,82 @@ local Shader = require "shader"
 local Controls = require "controls"
 local Particles = require "particles"
 
-local Y = 400
-local Y_2 = 400
+function Pong.load()
+    Pong.Y = 400
+    Pong.Y_2 = 400
 
-local burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
+    Pong.burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 
-local ball = {
-    x = 700,
-    y = 400,
-    dir = {
-        x = 270,
-        y = 300
+    Pong.ball = {
+        x = 700,
+        y = 400,
+        dir = {
+            x = 270,
+            y = 300
+        }
     }
-}
 
-local speed = 600
+    Pong.speed = 600
 
-local p1_score = 0
-local p2_score = 0
+    Pong.p1_score = 0
+    Pong.p2_score = 0
 
-local plyr_img = love.graphics.newImage("imgs/tiburon.png")
-local plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
-local ball_img = love.graphics.newImage("imgs/ball.png")
-local pong_background = love.graphics.newImage("imgs/pong_bg.png")
+    Pong.plyr_img = love.graphics.newImage("imgs/tiburon.png")
+    Pong.plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
+    Pong.ball_img = love.graphics.newImage("imgs/ball.png")
+    Pong.pong_background = love.graphics.newImage("imgs/pong_bg.png")
+end
+
 
 function Pong.update(dt)
     if love.keyboard.isDown("w") then
-        Y = Y - speed * dt
+        Pong.Y = Pong.Y - Pong.speed * dt
     end
     if love.keyboard.isDown("s") then
-        Y = Y + speed * dt
+        Pong.Y = Pong.Y + Pong.speed * dt
     end
     if love.keyboard.isDown("up") then
-        Y_2 = Y_2 - speed * dt
+        Pong.Y_2 = Pong.Y_2 - Pong.speed * dt
     end
     if love.keyboard.isDown("down") then
-        Y_2 = Y_2 + speed * dt
+        Pong.Y_2 = Pong.Y_2 + Pong.speed * dt
     end
 
-    ball.x = ball.x + ball.dir.x * dt
-    ball.y = ball.y + ball.dir.y * dt
+    Pong.ball.x = Pong.ball.x + Pong.ball.dir.x * dt
+    Pong.ball.y = Pong.ball.y + Pong.ball.dir.y * dt
 
     -- score of players
-    if ball.x < 0 then
-        ball.x = 700
-        ball.y = 400
-        p2_score = p2_score + 1
-        ball.dir.x, ball.dir.y = Normalize(ball.dir.x, ball.dir.y)
+    if Pong.ball.x < 0 then
+        Pong.ball.x = 700
+        Pong.ball.y = 400
+        Pong.p2_score = Pong.p2_score + 1
+        Pong.ball.dir.x, Pong.ball.dir.y = Normalize(Pong.ball.dir.x, Pong.ball.dir.y)
     end
-    if ball.x > 1300 then
-        ball.x = 700
-        ball.y = 400
-        p1_score = p1_score + 1
-        ball.dir.x, ball.dir.y = Normalize(ball.dir.x, ball.dir.y)
+    if Pong.ball.x > 1300 then
+        Pong.ball.x = 700
+        Pong.ball.y = 400
+        Pong.p1_score = Pong.p1_score + 1
+        Pong.ball.dir.x, Pong.ball.dir.y = Normalize(Pong.ball.dir.x, Pong.ball.dir.y)
     end
 
-    burst:update(dt)
+    Pong.burst:update(dt)
     local particle_amount = 20
 
     -- collition with ciel and ground
-    if ball.y < 0 or ball.y > 800 - ball_img:getHeight()*4 then
-        ball.dir.y = -ball.dir.y * 1.05
-        ball.dir.x = ball.dir.x * 1.05
-        burst:setPosition(ball.x + ball_img:getWidth()/2, ball.y + ball_img:getHeight()/2)
-        burst:emit(particle_amount)
+    if Pong.ball.y < 0 or Pong.ball.y > 800 - Pong.ball_img:getHeight()*4 then
+        Pong.ball.dir.y = -Pong.ball.dir.y * 1.05
+        Pong.ball.dir.x = Pong.ball.dir.x * 1.05
+        Pong.burst:setPosition(Pong.ball.x + Pong.ball_img:getWidth()/2, Pong.ball.y + Pong.ball_img:getHeight()/2)
+        Pong.burst:emit(particle_amount)
     end
 
-    -- collition ball with players
-    if CheckCollision(50+plyr_img:getWidth()*4, Y, 1, plyr_img:getHeight()*4, ball.x, ball.y, ball_img:getWidth()*2, ball_img:getHeight()*2)
-    or CheckCollision(1200, Y_2, 1, plyr_img_2:getHeight()*4, ball.x, ball.y, ball_img:getWidth()*2, ball_img:getHeight()*2) then
-        ball.dir.x = -ball.dir.x * 1.05
-        ball.dir.y = ball.dir.y * 1.05
-        burst:setPosition(ball.x + ball_img:getWidth()/2, ball.y + ball_img:getHeight()/2)
-        burst:emit(particle_amount)
+    -- collition Pong.ball with players
+    if CheckCollision(50+Pong.plyr_img:getWidth()*4, Pong.Y, 1, Pong.plyr_img:getHeight()*4, Pong.ball.x, Pong.ball.y, Pong.ball_img:getWidth()*2, Pong.ball_img:getHeight()*2)
+    or CheckCollision(1200, Pong.Y_2, 1, Pong.plyr_img_2:getHeight()*4, Pong.ball.x, Pong.ball.y, Pong.ball_img:getWidth()*2, Pong.ball_img:getHeight()*2) then
+        Pong.ball.dir.x = -Pong.ball.dir.x * 1.05
+        Pong.ball.dir.y = Pong.ball.dir.y * 1.05
+        Pong.burst:setPosition(Pong.ball.x + Pong.ball_img:getWidth()/2, Pong.ball.y + Pong.ball_img:getHeight()/2)
+        Pong.burst:emit(particle_amount)
     end
 
     Shader.update(dt)
@@ -84,7 +87,7 @@ function Pong.update(dt)
 end
 
 function Pong.draw()
-    love.graphics.draw(pong_background, 0, 0, 0, 2, 2)
+    love.graphics.draw(Pong.pong_background, 0, 0, 0, 2, 2)
 
     Controls.draw_w(50, 700)
     Controls.draw_s(114, 700)
@@ -92,21 +95,21 @@ function Pong.draw()
     Controls.draw_up(1250, 700)
     Controls.draw_down(1314, 700)
 
-    burst:draw()
+    Pong.burst:draw()
 
-    love.graphics.draw(ball_img, ball.x, ball.y, 0, 2, 2)
+    love.graphics.draw(Pong.ball_img, Pong.ball.x, Pong.ball.y, 0, 2, 2)
 
-    love.graphics.draw(plyr_img, 50, Y, 0, 4, 4)
-    love.graphics.draw(plyr_img_2, 1200, Y_2, 0, 4, 4)
+    love.graphics.draw(Pong.plyr_img, 50, Pong.Y, 0, 4, 4)
+    love.graphics.draw(Pong.plyr_img_2, 1200, Pong.Y_2, 0, 4, 4)
 
     love.graphics.setColor(0,0,0)
     love.graphics.print("SCORE P1", 10, 50)
     love.graphics.setColor(1,0,1)
-    love.graphics.print(p1_score, 250, 50)
+    love.graphics.print(Pong.p1_score, 250, 50)
     love.graphics.setColor(0,0,0)
     love.graphics.print("SCORE P2", 1050, 50)
     love.graphics.setColor(1,0,1)
-    love.graphics.print(p2_score, 1300, 50)
+    love.graphics.print(Pong.p2_score, 1300, 50)
     love.graphics.setColor(1,1,1)
 end
 

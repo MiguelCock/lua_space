@@ -11,19 +11,15 @@ local camera = {
 
 function Main_hub.load()
     --love.graphics.setBackgroundColor(1, 1, 1, 1)
-    _G.plyr_img = love.graphics.newImage("imgs/novapache2.png")
-    _G.projectile_img = love.graphics.newImage("imgs/star.png")
-    _G.background = love.graphics.newImage("imgs/bg.png")
+    Main_hub.plyr_img = love.graphics.newImage("imgs/novapache2.png")
+    Main_hub.projectile_img = love.graphics.newImage("imgs/star.png")
+    Main_hub.background = love.graphics.newImage("imgs/bg.png")
 
-    _G.planeta_1 = love.graphics.newImage("imgs/planeta.png")
-    _G.planeta_2 = love.graphics.newImage("imgs/planeta2.png")
-    _G.planeta_3 = love.graphics.newImage("imgs/planeta3.png")
+    Planets.create(300, 1000, love.graphics.newImage("imgs/planeta.png"), 2)
+    Planets.create(1000, 300, love.graphics.newImage("imgs/planeta2.png"), 3)
+    Planets.create(1600, 900, love.graphics.newImage("imgs/planeta3.png"), 4)
 
-    Planets.create(300, 1000, _G.planeta_1, 2)
-    Planets.create(1000, 300, _G.planeta_2, 3)
-    Planets.create(1600, 900, _G.planeta_3, 4)
-
-    Player:load(1400/2, 800/2, _G.plyr_img)
+    Player:load(1400/2, 800/2, Main_hub.plyr_img)
 end
 
 function Main_hub.update(dt)
@@ -37,12 +33,12 @@ function Main_hub.update(dt)
     if camera.x > background:getWidth()*2 then camera.x = background:getWidth()*2 end
     if camera.y > background:getHeight()*2 then camera.y = background:getHeight()*2 end
 
-    Controls.update(camera.x + love.graphics.getWidth() / 2, camera.y + love.graphics.getHeight() / 2)
+    Controls.update(camera.x, camera.y)
 end
 
 function Main_hub.draw()
     love.graphics.translate(-camera.x, -camera.y)
-    love.graphics.draw(_G.background, 0, 0, 0, 4, 4)
+    love.graphics.draw(Main_hub.background, 0, 0, 0, 4, 4)
     Planets.draw()
     Controls.draw_wasd(150, 600)
     Controls.draw_arrows(1150, 600)

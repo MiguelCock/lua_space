@@ -32,6 +32,8 @@ local draws = {
 
 function love.load()
     invaders.load()
+    pong.load()
+    invaders.load()
     mh.load()
     tanks.load()
 end

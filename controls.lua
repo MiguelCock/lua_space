@@ -42,8 +42,8 @@ function Controls.update(camera_x, camera_y)
     key_pressed.left = love.keyboard.isDown("left")
     key_pressed.right = love.keyboard.isDown("right")
 
-    Controls.offset.x = camera_x - love.graphics.getWidth() / 2
-    Controls.offset.y = camera_y - love.graphics.getHeight() / 2
+    Controls.offset.x = camera_x
+    Controls.offset.y = camera_y
 end
 
 function Controls.draw_wasd(x, y)
