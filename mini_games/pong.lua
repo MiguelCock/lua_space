@@ -10,13 +10,13 @@ function Pong.load()
     Pong.player_1 = {}
     Pong.player_1.y = 400
     Pong.player_1.score = 0
-    Pong.player_1.img = love.graphics.newImage("imgs/tiburon.png")
+    Pong.player_1.img = love.graphics.newImage("assets/imgs/tiburon.png")
 
     -- Player 2
     Pong.player_2 = {}
     Pong.player_2.y = 400
     Pong.player_2.score= 0
-    Pong.player_2.img = love.graphics.newImage("imgs/novajolote.png")
+    Pong.player_2.img = love.graphics.newImage("assets/imgs/novajolote.png")
 
     -- Particles
     Pong.burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
@@ -30,10 +30,10 @@ function Pong.load()
             y = 300
         }
     }
-    Pong.ball_img = love.graphics.newImage("imgs/ball.png")
+    Pong.ball_img = love.graphics.newImage("assets/imgs/ball.png")
 
     -- Back ground
-    Pong.pong_background = love.graphics.newImage("imgs/pong_bg.png")
+    Pong.pong_background = love.graphics.newImage("assets/imgs/pong_bg.png")
 end
 
 

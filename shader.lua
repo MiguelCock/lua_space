@@ -1,11 +1,12 @@
-local Shader = {
-  crtShader = love.graphics.newShader("shaders/crt_2.glsl"),
-  time = 0,
-  sceneCanvas = love.graphics.newCanvas(1400, 800)
-}
+local Shader = {}
 
-Shader.crtShader:send("curvature", 0.5)
-Shader.crtShader:send("scanline", 1)
+function Shader.load()
+  Shader.crtShader = love.graphics.newShader("assets/shaders/crt_2.glsl")
+  Shader.time = 0
+  Shader.crtShader:send("curvature", 0.5)
+  Shader.crtShader:send("scanline", 1)
+  Shader.sceneCanvas = love.graphics.newCanvas(1400, 800)
+end
 
 function Shader.update(dt)
   Shader.time = Shader.time + dt

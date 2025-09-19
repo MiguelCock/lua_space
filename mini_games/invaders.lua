@@ -13,27 +13,27 @@ function Invaders.load()
     Invaders.player_1 = {}
     Invaders.player_1.x = 600
     Invaders.player_1.fire_rate = 0
-    _G.plyr_img = love.graphics.newImage("imgs/novapache2.png")
+    _G.plyr_img = love.graphics.newImage("assets/imgs/novapache2.png")
 
     -- Player 2
     Invaders.player_2 = {}
     Invaders.player_2.x = 800
     Invaders.player_2.fire_rate = 0
-    _G.plyr_img_2 = love.graphics.newImage("imgs/novajolote.png")
+    _G.plyr_img_2 = love.graphics.newImage("assets/imgs/novajolote.png")
 
     -- Projectiles
     Invaders.projectiles = {}
     Invaders.projectile_speed = 1000
-    _G.projectile_img = love.graphics.newImage("imgs/star.png")
+    _G.projectile_img = love.graphics.newImage("assets/imgs/star.png")
 
     -- Enemies
     Invaders.enemies = {}
     Invaders.enemy_speed = 40
     Invaders.score = 0
-    _G.enemy_img = love.graphics.newImage("imgs/frog.png")
+    _G.enemy_img = love.graphics.newImage("assets/imgs/frog.png")
 
     -- Background
-    _G.background = love.graphics.newImage("imgs/bg.png")
+    _G.background = love.graphics.newImage("assets/imgs/bg.png")
 
     -- Particles
     Invaders.burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)

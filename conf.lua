@@ -1,6 +1,6 @@
 function love.conf(t)
     t.window.title = "nova_invaders"
-    t.window.icon = "imgs/novapache2.png"
+    t.window.icon = "assets/imgs/novapache2.png"
 
     t.window.height = 800
     t.window.width = 1400

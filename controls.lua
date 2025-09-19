@@ -12,7 +12,7 @@ local key_pressed = {
 }
 
 function Controls.load()
-    Controls.spriteSheet = love.graphics.newImage("imgs/WASD.png")
+    Controls.spriteSheet = love.graphics.newImage("assets/imgs/WASD.png")
     Controls.quads = {
         w_up = love.graphics.newQuad(0, 0, 16, 16, 128, 32),
         w_down = love.graphics.newQuad(16, 0, 16, 16, 128, 32),

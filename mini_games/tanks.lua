@@ -14,20 +14,20 @@ function Tanks.load()
         }
     end
 
-    Tanks.grass_bg = love.graphics.newImage("imgs/pasto.png")
+    Tanks.grass_bg = love.graphics.newImage("assets/imgs/pasto.png")
 
     -- Player 1 (WASD + Space)
     Tanks.tank1 = newTank(200, 400, 0, {1, 0, 0}, {
         up = "w", down = "s", left = "a", right = "d", shoot = "space"
     })
 
-    Tanks.tank1.img = love.graphics.newImage("imgs/tank_pacho.png")
+    Tanks.tank1.img = love.graphics.newImage("assets/imgs/tank_pacho.png")
 
     -- Player 2 (Arrows + l)
     Tanks.tank2 = newTank(1200, 400, math.pi, {0, 0, 1}, {
         up = "up", down = "down", left = "left", right = "right", shoot = "l"
     })
-    Tanks.tank2.img = love.graphics.newImage("imgs/tank_pacho.png")
+    Tanks.tank2.img = love.graphics.newImage("assets/imgs/tank_pacho.png")
 end
 
 function Tanks.update(dt)

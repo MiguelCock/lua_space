@@ -1,6 +1,6 @@
-local Player = require("player")
-local Planets = require("planets")
-local Controls = require("controls")
+local Player = require "player"
+local Planets = require "planets"
+local Controls = require "controls"
 
 local Main_hub = {}
 
@@ -10,13 +10,13 @@ local camera = {
 }
 
 function Main_hub.load()
-    Main_hub.plyr_img = love.graphics.newImage("imgs/novapache2.png")
-    Main_hub.projectile_img = love.graphics.newImage("imgs/star.png")
-    Main_hub.background = love.graphics.newImage("imgs/bg.png")
+    Main_hub.plyr_img = love.graphics.newImage("assets/imgs/novapache2.png")
+    Main_hub.projectile_img = love.graphics.newImage("assets/imgs/star.png")
+    Main_hub.background = love.graphics.newImage("assets/imgs/bg.png")
 
-    Planets.create(300, 1000, love.graphics.newImage("imgs/planeta.png"), 2)
-    Planets.create(1000, 300, love.graphics.newImage("imgs/planeta2.png"), 3)
-    Planets.create(1600, 900, love.graphics.newImage("imgs/planeta3.png"), 4)
+    Planets.create(300, 1000, love.graphics.newImage("assets/imgs/planeta.png"), 2)
+    Planets.create(1000, 300, love.graphics.newImage("assets/imgs/planeta2.png"), 3)
+    Planets.create(1600, 900, love.graphics.newImage("assets/imgs/planeta3.png"), 4)
 
     Player:load(1400/2, 800/2, Main_hub.plyr_img)
 end
