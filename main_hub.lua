@@ -10,7 +10,6 @@ local camera = {
 }
 
 function Main_hub.load()
-    --love.graphics.setBackgroundColor(1, 1, 1, 1)
     Main_hub.plyr_img = love.graphics.newImage("imgs/novapache2.png")
     Main_hub.projectile_img = love.graphics.newImage("imgs/star.png")
     Main_hub.background = love.graphics.newImage("imgs/bg.png")
@@ -25,8 +24,8 @@ end
 function Main_hub.update(dt)
     Player:update(dt)
 
-    camera.x = Player.x - 1400 / 2 --+ Player.img:getWidth() * 2
-    camera.y = Player.y - 800 / 2 --+ Player.img:getHeight() * 2
+    camera.x = Player.x - 1400 / 2
+    camera.y = Player.y - 800 / 2
 
     if camera.x < 0 then camera.x = 0 end
     if camera.y < 0 then camera.y = 0 end

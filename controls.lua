@@ -1,6 +1,19 @@
-local Controls = {
-    spriteSheet = love.graphics.newImage("imgs/WASD.png"),
-    quads = {
+local Controls = {}
+
+local key_pressed = {
+    w = false,
+    a = false,
+    s = false,
+    d = false,
+    up = false,
+    down = false,
+    left = false,
+    right = false
+}
+
+function Controls.load()
+    Controls.spriteSheet = love.graphics.newImage("imgs/WASD.png")
+    Controls.quads = {
         w_up = love.graphics.newQuad(0, 0, 16, 16, 128, 32),
         w_down = love.graphics.newQuad(16, 0, 16, 16, 128, 32),
         a_up = love.graphics.newQuad(32, 0, 16, 16, 128, 32),
@@ -17,20 +30,9 @@ local Controls = {
         arrow_down_down = love.graphics.newQuad(80, 16, 16, 16, 128, 32),
         arrow_right_up = love.graphics.newQuad(96, 16, 16, 16, 128, 32),
         arrow_right_down = love.graphics.newQuad(112, 16, 16, 16, 128, 32),
-    },
-    offset = { x = 0, y = 0 }
-}
-
-local key_pressed = {
-    w = false,
-    a = false,
-    s = false,
-    d = false,
-    up = false,
-    down = false,
-    left = false,
-    right = false
-}
+    }
+    Controls.offset = { x = 0, y = 0 }
+end
 
 function Controls.update(camera_x, camera_y)
     key_pressed.w = love.keyboard.isDown("w")

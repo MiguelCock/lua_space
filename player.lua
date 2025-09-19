@@ -1,23 +1,19 @@
+local Player = {}
+
 local Particles = require "particles"
 
 local burst
-
-local Player = {
-    x = 0,
-    y = 0,
-    sx = 0,
-    sy = 0,
-    angle = 0,
-    radius = 16*4,
-    top_speed = 7,
-    acceleration = 1,
-    img = nil,
-}
 
 function Player.load(self, x, y, img)
     self.x = x
     self.y = y
     self.img = img
+    self.sx = 0
+    self.sy = 0
+    self.angle = 0
+    self.radius = 16*4
+    self.top_speed = 7
+    self.acceleration = 1
 
     burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)
 end

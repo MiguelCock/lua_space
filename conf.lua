@@ -12,6 +12,6 @@ function love.conf(t)
     t.window.x = 100
     t.window.y = 20
 
-    --t.window.fullscreen = true
+    t.window.fullscreen = true
     t.window.borderless = true
 end

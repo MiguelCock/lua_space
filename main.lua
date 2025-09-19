@@ -1,17 +1,18 @@
-_G.love = require("love")
+_G.love = require "love"
 
 love.graphics.setDefaultFilter("nearest", "nearest")
 love.graphics.setFont(love.graphics.newFont("assets/daydream.otf", 32))
 
-local shader = require("shader")
-local player = require("player")
-local mh = require("main_hub")
+local shader = require "shader"
+local controls = require "controls"
+local player = require "player"
+local mh = require "main_hub"
 
 -- Mini games
-local pong = require("mini_games.pong")
-local invaders = require("mini_games.invaders")
-local tanks = require("mini_games.tanks")
-local planets = require("planets")
+local pong = require "mini_games.pong"
+local invaders = require "mini_games.invaders"
+local tanks = require "mini_games.tanks"
+local planets = require "planets"
 
 local state = 1
 local state_timer = 0
@@ -36,6 +37,7 @@ function love.load()
     invaders.load()
     mh.load()
     tanks.load()
+    controls.load()
 end
 
 local fs_timer = 0

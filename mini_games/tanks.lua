@@ -23,7 +23,7 @@ function Tanks.load()
 
     Tanks.tank1.img = love.graphics.newImage("imgs/tank_pacho.png")
 
-    -- Player 2 (Arrows + Return)
+    -- Player 2 (Arrows + l)
     Tanks.tank2 = newTank(1200, 400, math.pi, {0, 0, 1}, {
         up = "up", down = "down", left = "left", right = "right", shoot = "l"
     })
