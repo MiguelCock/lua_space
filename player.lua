@@ -12,7 +12,7 @@ function Player.load(self, x, y, img)
     self.sy = 0
     self.angle = 0
     self.radius = 16*4
-    self.top_speed = 7
+    self.top_speed = 5
     self.acceleration = 1
 
     burst = Particles.new(love.graphics.getWidth()/2, love.graphics.getHeight()/2)

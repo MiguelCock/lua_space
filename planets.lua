@@ -1,12 +1,13 @@
 local Planets = {}
 
 -- Create and save a planet
-function Planets.create(x, y, img, miniGameIndex)
+function Planets.create(x, y, scale, img, miniGameIndex)
     local planet = {
         x = x,
         y = y,
         img = img,
-        radius = img:getWidth() * 4,
+        scale = scale,
+        radius = img:getWidth() * scale,
         miniGameIndex = miniGameIndex
     }
     table.insert(Planets, planet)
@@ -29,7 +30,7 @@ end
 -- Draw all Planets
 function Planets.draw()
     for _, planet in ipairs(Planets) do
-        love.graphics.draw(planet.img, planet.x, planet.y, 0, 8, 8, planet.img:getWidth()/2, planet.img:getHeight()/2)
+        love.graphics.draw(planet.img, planet.x, planet.y, 0, planet.scale * 2, planet.scale * 2, planet.img:getWidth()/2, planet.img:getHeight()/2)
     end
 end
 

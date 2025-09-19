@@ -14,9 +14,17 @@ function Main_hub.load()
     Main_hub.projectile_img = love.graphics.newImage("assets/imgs/star.png")
     Main_hub.background = love.graphics.newImage("assets/imgs/bg.png")
 
-    Planets.create(300, 1000, love.graphics.newImage("assets/imgs/planeta.png"), 2)
-    Planets.create(1000, 300, love.graphics.newImage("assets/imgs/planeta2.png"), 3)
-    Planets.create(1600, 900, love.graphics.newImage("assets/imgs/planeta3.png"), 4)
+    Planets.create(200, 200, 4, love.graphics.newImage("assets/imgs/planeta.png"), 2)
+    Planets.create(800, 200, 3, love.graphics.newImage("assets/imgs/planeta2.png"), 3)
+    Planets.create(1400, 200, 1, love.graphics.newImage("assets/imgs/planeta3.png"), 4)
+
+    Planets.create(200, 800, 1, love.graphics.newImage("assets/imgs/planeta.png"), 5)
+    Planets.create(800, 800, 2, love.graphics.newImage("assets/imgs/planeta2.png"), 6)
+    Planets.create(1400, 800, 3, love.graphics.newImage("assets/imgs/planeta3.png"), 7)
+
+    Planets.create(200, 1400, 5, love.graphics.newImage("assets/imgs/planeta.png"), 8)
+    Planets.create(800, 1400, 1, love.graphics.newImage("assets/imgs/planeta2.png"), 9)
+    Planets.create(1400, 1400, 4, love.graphics.newImage("assets/imgs/planeta3.png"), 10)
 
     Player:load(1400/2, 800/2, Main_hub.plyr_img)
 end
